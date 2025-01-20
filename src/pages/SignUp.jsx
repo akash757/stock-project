@@ -8,12 +8,13 @@ import { styled } from '@mui/material/styles';
 import { SitemarkIcon } from './CustomIcons';
 import AppTheme from './AppTheme'; // Import AppTheme component
 import { useNavigate } from 'react-router-dom';
-import { VerifiedUser } from '@mui/icons-material';
+import { BorderColor, VerifiedUser } from '@mui/icons-material';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import LockIcon from '@mui/icons-material/Lock';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { color } from 'framer-motion';
 import  File  from '../assets/Images/file.png';
+import  CheckIcon  from '../assets/Images/CheckIcon.png';
 import { Link } from 'react-router-dom';
 // import ColorModeSelect from '../shared-theme/ColorModeSelect';
 
@@ -37,12 +38,12 @@ const Card = styled(MuiCard)(({ theme }) => ({
 }));
 
 const SignInContainer = styled(Stack)(({ theme }) => ({
+  background:'#000',
   // height: 'calc((1 - var(--template-frame-height, 0)) * 100dvh)',
   // minHeight: '100%',
-  background:'#000',
   padding:'0',
   margin:'0',
-  marginTop: '-48px',
+  marginTop: '-102px',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -85,7 +86,7 @@ const StyleDiv = styled(Stack)(({ theme }) => ({
     margin: '0',
   },
   '& img' : {
-    marginBottom: '50px',
+    marginBottom: '70px',
     height: '70px',
   },
   '& .ShortIntro' : {
@@ -103,7 +104,6 @@ const StyleDiv = styled(Stack)(({ theme }) => ({
   }
 }));
 const StyleBox = styled(Stack)(({ theme }) => ({ 
-  height: '100%',
   background: 'rgba(75,75,75,0.5)',
   width: '500px',
   padding: '45px',
@@ -115,6 +115,7 @@ const StyleBox = styled(Stack)(({ theme }) => ({
     fontSize: '28px',
     fontWeight: 'bold',
     marginTop:'0',
+    marginBottom:'35px',
   },
 }));
 const FromGroup = styled(Stack)(({ theme }) => ({ 
@@ -161,12 +162,47 @@ const FromGroup = styled(Stack)(({ theme }) => ({
     top: '-3px',
   }
 }));
+const StyleModal = styled(Stack)(({ theme }) => ({ 
+  display:'flex',
+  position: 'fixed',
+  zIndex:'9999',
+  top:'0',
+  bottom:'0',
+  left:'0',
+  right:'0',
+  background: 'rgba(0,0,0,0.5)',
+  alignItems: 'center',
+  justifyContent: 'center',
+  '& .InnerStyleModal': {
+    display:'flex',
+    width:'420px',
+    height:'390px',
+    background:'#2838cf',
+    borderRadius:'10px',
+    alignItems: 'center',
+    justifyContent: 'center',    
+    flexDirection: 'column',
+    padding:'20px 50px',
+    textAlign:'center',
+  },
+  '& .SignDark': {
+    background: '#000',
+    borderColor: "#000",
+    padding:'10px 40px',
+    fontSize:'12px',
+  },
+  '& .ShortIntroModal': {
+    fontSize:'12px',
+    marginTop:'5px',
+  }
+}));
 
  
-export default function SignIn(props) {
+export default function SignUp(props) {
   const [emailError, setEmailError] = React.useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = React.useState('');
   const [passwordError, setPasswordError] = React.useState(false);
+  const [signUpSuccess, setSignUpSuccess] = React.useState(false);
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate()
@@ -213,76 +249,91 @@ export default function SignIn(props) {
 
     return isValid;
   };
+  const handleSignupClick = () => {
+    setSignUpSuccess(true);
+  }
 
   return (
-    <AppTheme {...props}> {/* Use AppTheme to wrap your components */}
-      <CssBaseline enableColorScheme />
-      <SignInContainer className='SignInContainer' direction="column" justifyContent="space-between">
-      {/* onClick={() => navigate("/dashboard")} */}
-        {/* <Card variant="outlined" > */}
-        <div className='d-flex MainDiv' component="form" onSubmit={handleSubmit} noValidate>
-        <StyleDiv className='StyleDiv'>
-          <div>
-            <img src={File} alt="My File" />
-            <p className='WelcomeText'>Welcome to</p>
-            <h1 className='text-uppercase font-weight-normal'>Trade<b>Flow</b></h1>
-            <p className='ShortIntro'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-          </div>
-        </StyleDiv>
-        <StyleBox className='StyleBox'>
-            <p className='SignInText'>
-              Sign In
-            </p>
-            <FromGroup>
-              <span style={{position:"relative", display: 'flex', flexDirection: 'column' }}>
-                <label for="email">Email</label>
-                <PermIdentityIcon className='UserIcon'/>
+    <>
+      <AppTheme {...props}> {/* Use AppTheme to wrap your components */}
+        <CssBaseline enableColorScheme />
+        <SignInContainer className='SignInContainer' direction="column" justifyContent="space-between">
+        {/* onClick={() => navigate("/dashboard")} */}
+          {/* <Card variant="outlined" > */}
+          <div className='d-flex MainDiv' component="form" onSubmit={handleSubmit} noValidate>
+          <StyleDiv className='StyleDiv'>
+            <div>
+              <img src={File} alt="My File" />
+              <h1 className='font-weight-normal'><div>Transform Your</div> <div> Trading with </div><b>Real-Time Insights</b></h1>
+              <p className='ShortIntro mt-3'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+            </div>
+          </StyleDiv>
+          <StyleBox className='StyleBox'>
+              <p className='SignInText'>              
+                Sign Up
+              </p>
+              <FromGroup>
+                <span style={{position:"relative", display: 'flex', flexDirection: 'column' }}>
+                  <label for="email">Email</label>
+                  <PermIdentityIcon className='UserIcon'/>
+                  <input 
+                    type="email" 
+                    id="email" 
+                    placeholder="Enter Email"
+                    autocomplete="email"
+                    className='Inputs'
+                  />
+                </span>
+                <span style={{position:"relative", display: 'flex', flexDirection: 'column' }}>
+                <label for="email" className='mt-3'>Password</label>
+                <LockIcon className='UserIcon' style={{top: '62px'}}/>
                 <input 
-                  type="email" 
-                  id="email" 
-                  placeholder="Enter Email"
-                  autocomplete="email"
+                  type="Password" 
+                  id="Password" 
+                  placeholder="Enter Password"
+                  autocomplete="Password"
                   className='Inputs'
                 />
-              </span>
-              <span style={{position:"relative", display: 'flex', flexDirection: 'column' }}>
-              <label for="email" className='mt-3'>Password</label>
-              <LockIcon className='UserIcon' style={{top: '62px'}}/>
-              <input 
-                type="Password" 
-                id="PasswordF" 
-                placeholder="Enter Password"
-                autocomplete="password"
-                className='Inputs'
-              />
-              <VisibilityIcon className='UserIcon' style={{top: '62px', right:"16px", left:"auto"}}/>
-              </span>
-               <div className="remember-forgot">
-                <div className="remember-me">
-                    <input type="checkbox" id="remember" className='CheckBoxRemember'/>
-                    <label for="remember" className='LableOfRemember m-0'>Remember me</label>
-                </div>
-                <a href="#" className="forgot-password">Forgot password?</a>
-            </div>
-            </FromGroup>
-            <Link to="/dashboard" className="btn btn-primary mt-3">
-                  <span style={{position:'relative', top:'5px'}}>Sign In</span>
-            </Link>
-            <div className='d-flex align-middle justify-content-center mt-5'>
-              <p className='LableOfRemember m-0 mr-2'>
-                New User?
-              </p>
-              <Link to="/signup" className="NewSignUp btn btn-Normal text-warning p-0">
-                  Sign Up
-              </Link>
-            </div>
-         </StyleBox>
-         
-            {/* Form Fields */}
-          </div>
+                <VisibilityIcon className='UserIcon' style={{top: '62px', right:"16px", left:"auto"}}/>
+                </span>
+                <span style={{position:"relative", display: 'flex', flexDirection: 'column' }}>
+                <label for="email" className='mt-3'>Confirm Password</label>
+                <LockIcon className='UserIcon' style={{top: '62px'}}/>
+                <input 
+                  type="Password" 
+                  id="Password" 
+                  placeholder="Enter Password"
+                  autocomplete="Password"
+                  className='Inputs'
+                />
+                <VisibilityIcon className='UserIcon' style={{top: '62px', right:"16px", left:"auto"}}/>
+                </span>
+              </FromGroup>
+              <button type="button" className="btn btn-primary mt-5" onClick={handleSignupClick}>Sign Up</button>
+              <div className='d-flex align-middle justify-content-center mt-5'>
+                <p className='LableOfRemember m-0 mr-2'>
+                  Already a Member?
+                </p>
+                <Link to="/signin" className="NewSignUp btn btn-Normal text-warning p-0">
+                Sign In
+                </Link>
+              </div>
+          </StyleBox>
           
-        {/* </Card> */}
-      </SignInContainer>
-    </AppTheme>
+              {/* Form Fields */}
+            </div>
+            
+          {/* </Card> */}
+        </SignInContainer>
+      </AppTheme>
+      {signUpSuccess ? <StyleModal>
+          <div className='InnerStyleModal'>
+            <img src={CheckIcon} alt='CheckIcon' />
+            <h1>Congratulations !</h1>
+            <p className='ShortIntroModal'>Lorem Ipsum is simply dummy text of the printing and Lorem Ipsum is Lorem Ipsum is Lorem Ipsum is Lorem Ipsum is simply dummy text of the printing and Lorem Ipsum is simply</p>
+            <Link to="/signin" className="btn btn-dark SignDark">Sign In</Link>
+          </div>
+      </StyleModal> :""}
+    </>
   );
 }

@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { StyledTable, StyleModal } from './AnimatedTable';
+import { StyledTable, StyleModal, StyleOption, StyleModalFilter } from './AnimatedTable';
 import { Reorder } from 'framer-motion';
 import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
 import CloseIcon from '@mui/icons-material/Close';
 import { BubblePlot } from './BubblePlot';
 import { StackedBarplot } from './StackedBarplot';
+import { BiDirectionalBarChart } from './BiDirectionalBarChart';
+import { PeriodicData } from './PeriodicData';
 import { useSelector } from 'react-redux';
+import DetailsData from './DetailsData';
+import SearchIcon from '@mui/icons-material/Search';
+import TuneIcon from '@mui/icons-material/Tune';
+import CloudSyncIcon from '@mui/icons-material/CloudSync';
+
 
 export default function AnimatedTable() {
-  const [data, setResponceData] = useState([]);
+  const [responceData, setResponceData] = useState([]);
   const theamColor = useSelector((state) => state.theme.mode)
   const chartData = [
     {
@@ -148,7 +155,10 @@ export default function AnimatedTable() {
     },
   ];
   
-  const [animationState, setAnimationState] = useState(false); // Track animation state
+  const [animationState, setAnimationState] = useState(false); 
+  const [filterState, setFilterState] = useState(false); 
+  const [showDetails, setShowDetails] = useState(false); 
+  const [detailsofRow, setDetailsofRow] = useState();
   const [animationStateindex, setAnimationStateIndex] = useState(-1);
   const fetchdata= async () => {
     try {
@@ -171,23 +181,38 @@ export default function AnimatedTable() {
   setAnimationState(false);
   setAnimationStateIndex(-1);
  }
- 
-  // useEffect(() => {
-  //   const interval  = setInterval(() => {
-  //     fetchdata();
-  //   }, 10000);
-  //   return () => clearInterval(interval);
-  // }, [data]);
 
   useEffect(() => {
     fetchdata();
   }, []);
 
+  const handleDetails = (dataRow) => {
+    setShowDetails(true);
+    setDetailsofRow(responceData);
+  }
 
+  const handleCloseDetails = () => {
+    debugger;
+    setShowDetails(false);
+  }
+  const handleFilerOption = () => {
+    setFilterState(true);
+  };
+  const handleFilerOptionClose = () => {
+    setFilterState(false);
+  };
+  
   return (
-    <>
+    <div style={{position:'relative'}}>
+      <StyleOption>
+        <div className='SearchInputs'>
+          <SearchIcon  className='SearchIcon'/>
+          <input type="text" placeholder='Search'/>
+        </div>
+        <button type="button" class="btn btn-primary Filtericon" onClick={() => handleFilerOption()}><TuneIcon />Filter <span class="badge bg-warning text-dark" style={{position:'relative', top:'0px'}}>0</span></button>
+      </StyleOption>
       <StyledTable>
-        <Reorder.Group values={data} onReorder={setResponceData}>
+        <Reorder.Group values={responceData} onReorder={setResponceData}>
         <table style={{
                 width: !animationState ? "100%" : "37.2%", 
             }}>
@@ -212,10 +237,10 @@ export default function AnimatedTable() {
             </tr>
           </thead>
           <tbody>
-            {data && data.map((row, index) => {
+            {responceData && responceData.map((row, index) => {
               return (
               <Reorder.Item
-              as='tr'
+                as='tr'
                 key={row.price_change_percentage_24h} value={row.price_change_percentage_24h}
                 className={
                   row.current_price > 100
@@ -223,21 +248,21 @@ export default function AnimatedTable() {
                     : 'RedColor'
                 }
               >
-                <td width="5%">{index + 1}</td>
-                <td width="5%">{row.name}</td>
-                <td>${row.current_price}</td>
-                <td>${row.market_cap}</td>
-                {!animationState ? <td>{row.market_cap_rank}</td>: ""}
-                {!animationState ?<td>{row.price_change_percentage_24h}</td>  : ""}            
-                {!animationState ?<td>2x</td>: ""}
-                {!animationState ?<td>1x</td>: ""}
-                {!animationState ?<td>5x</td>: ""}
-                {!animationState ?<td>Yes</td>: ""}
-                {!animationState ?<td>No</td>: ""}
-                {!animationState ?<td>Yes</td>: ""}
-                {!animationState ?<td>No</td>: ""}
-                {!animationState ?<td>10</td>: ""}
-                {!animationState ?<td>5</td>: ""}
+                <td width="5%" onClick={(e) => handleDetails(row)}>{index + 1}</td>
+                <td width="5%" onClick={(e) => handleDetails(row)}>{row.name}</td>
+                <td onClick={(e) => handleDetails(row)}>${row.current_price}</td>
+                <td onClick={(e) => handleDetails(row)}>${row.market_cap}</td>
+                {!animationState ? <td onClick={(e) => handleDetails(row)}>{row.market_cap_rank}</td>: ""}
+                {!animationState ?<td onClick={(e) => handleDetails(row)}>{row.price_change_percentage_24h}</td>  : ""}            
+                {!animationState ?<td onClick={(e) => handleDetails(row)}>2x</td>: ""}
+                {!animationState ?<td onClick={(e) => handleDetails(row)}>1x</td>: ""}
+                {!animationState ?<td onClick={(e) => handleDetails(row)}>5x</td>: ""}
+                {!animationState ?<td onClick={(e) => handleDetails(row)}>Yes</td>: ""}
+                {!animationState ?<td onClick={(e) => handleDetails(row)}>No</td>: ""}
+                {!animationState ?<td onClick={(e) => handleDetails(row)}>Yes</td>: ""}
+                {!animationState ?<td onClick={(e) => handleDetails(row)}>No</td>: ""}
+                {!animationState ?<td onClick={(e) => handleDetails(row)}>10</td>: ""}
+                {!animationState ?<td onClick={(e) => handleDetails(row)}>5</td>: ""}
                 <td style={{textAlign:"center"}}>
                 {animationState  && index === animationStateindex ? <CloseIcon style={{cursor:"pointer", color: "#fff", fontSize:"15px"}} onClick={() => handleModalEventClose(index)}/>
                   : <img src="analysis.svg" style={{cursor:"pointer", color:"#fff", backgroundColor:theamColor === "Light_Mode" ? "rgba(149, 149, 149, .20)" : ""}}  onClick={() => handleModalEvent(index)}/>
@@ -248,18 +273,78 @@ export default function AnimatedTable() {
         </table>
         </Reorder.Group>
       </StyledTable>
+      {showDetails ? <DetailsData Data={detailsofRow} closeDetails={handleCloseDetails} /> : ""}
     {animationState ? <StyleModal >
       <div className='modal RightsideModal'  style={{
                 width: animationState ? "63%" : "0", 
+                display: "flex",
               }}>
           <div className='DivCollection' style={{display:"flex"}}>
             <BubblePlot  width={420} height={315}  data={chartData} theamColor={theamColor}/>
             <StackedBarplot data={barChartdata} width={430} height={315} theamColor={theamColor}/> 
-            <BubblePlot width={420} height={350}  data={chartData} theamColor={theamColor}/>
-            <StackedBarplot data={barChartdata} width={430} height={350} theamColor={theamColor}/> 
+            <BiDirectionalBarChart width={420} height={520} theamColor={theamColor}/>
+            <PeriodicData data={barChartdata} width={430} height={250} theamColor={theamColor}/> 
         </div>
       </div>
     </StyleModal> : ""}
-    </>
+    {filterState ? <StyleModalFilter>
+      <div className='modal RightsideModal'  style={{
+                width: filterState ? "30%" : "0", 
+                display: "flex",
+              }}>
+                <div style={{width: '100%'}}>
+                  <div className='DivCollection' style={{display:"flex"}}>
+                  <div><p>Filter</p></div>
+                  <div className='RightIcon'>
+                    <CloudSyncIcon />
+                    <span style={{margin: '0 15px', position: 'relative', top: '-2px'}}> | </span>
+                    <button type="button" class="btn btn-link p-0" style={{color: "#fff", lineHeight:'0'}} onClick={() => handleFilerOptionClose()}><CloseIcon /></button>
+                  </div>
+                </div>
+                <div class="mt-3 form-group">
+                  <div className='BothSide'><label for="score">Score</label><span class="badge badge-primary">0</span></div>
+                  <input type="range" class="form-control-range" id="score" min="0" max="100" defaultValue="0" />
+                </div>
+                <div class="mt-3 form-group">
+                  <div className='BothSide'><label for="TotalCallBuyCost">Total Call Buy Cost</label><span class="badge badge-primary">$10,00,000</span></div>
+                  <input type="range" class="form-control-range" id="TotalCallBuyCost"  min="0" max="100" defaultValue="20" />
+                </div>
+                <div class="mt-3 form-group">
+                  <div className='BothSide'><label for="TotalPutBuyCost">Total Put Buy Cost</label><span class="badge badge-primary">$10,00,000</span></div>
+                  <input type="range" class="form-control-range" id="TotalPutBuyCost"  min="0" max="100" defaultValue="20"/>
+                </div>
+                <div class="mt-3 form-group">
+                  <div className='BothSide'><label for="TotalCallSellCost">Total Call Sell Cost</label><span class="badge badge-primary">$10,00,000</span></div>
+                  <input type="range" class="form-control-range" id="TotalCallSellCost"  min="0" max="100" defaultValue="20"/>
+                </div>
+                <div class="mt-3 form-group">
+                  <div className='BothSide'><label for="TotalPutSellCost">Total Put Sell Cost</label><span class="badge badge-primary">$10,00,000</span></div>
+                  <input type="range" class="form-control-range" id="TotalPutSellCost"  min="0" max="100" defaultValue="20"/>
+                </div>
+                <div class="mt-3 form-group">
+                  <div className='BothSide'><label for="TotalPutCallCost">Total Put Call Cost</label><span class="badge badge-primary">$10,00,000</span></div>
+                  <input type="range" class="form-control-range" id="TotalPutCallCost"  min="0" max="100" defaultValue="20" />
+                </div>
+                <div class="mt-3 form-group">
+                  <div className='BothSide'><label for="Call2PutBuyRatio">Call 2 Put Buy Ratio</label><span class="badge badge-primary">1X</span></div>
+                  <input type="range" class="form-control-range" id="Call2PutBuyRatio" min="0" max="100" defaultValue="10"/>
+                </div>
+                <div class="mt-3 form-group">
+                  <div className='BothSide'><label for="CallBuy2CallSellRatio">Call Buy 2 Call Sell Ratio</label><span class="badge badge-primary">1X</span></div>
+                  <input type="range" class="form-control-range" id="CallBuy2CallSellRatio" min="0" max="100" defaultValue="10" />
+                </div>
+                <div class="mt-3 form-group">
+                  <div className='BothSide'><label for="CallBuy2PreviousCallBuy">Call Buy 2 Previous Call Buy</label><span class="badge badge-primary">1X</span></div>
+                  <input type="range" class="form-control-range" id="CallBuy2PreviousCallBuy" min="0" max="100" defaultValue="10" />
+                </div>
+                <div class="mt-3 form-group mb-5 ButtonSame">
+                  <button type="button" class="btn btn-primary">Filter</button>
+                  <button type="button" class="btn btn-secondary">Clear</button>
+                </div>
+              </div>
+              </div>
+     
+    </StyleModalFilter> : ""}
+    </div>
   );
 }
