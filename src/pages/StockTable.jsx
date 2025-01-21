@@ -273,14 +273,14 @@ export default function AnimatedTable() {
         </table>
         </Reorder.Group>
       </StyledTable>
-      {showDetails ? <DetailsData Data={detailsofRow} closeDetails={handleCloseDetails} /> : ""}
+      {showDetails ? <DetailsData Data={detailsofRow} closeDetails={() => handleCloseDetails} /> : ""}
     {animationState ? <StyleModal >
       <div className='modal RightsideModal'  style={{
                 width: animationState ? "63%" : "0", 
                 display: "flex",
               }}>
           <div className='DivCollection' style={{display:"flex"}}>
-            <BubblePlot  width={420} height={315}  data={chartData} theamColor={theamColor}/>
+            <BubblePlot  width={420} height={280}  data={chartData} theamColor={theamColor}/>
             <StackedBarplot data={barChartdata} width={430} height={315} theamColor={theamColor}/> 
             <BiDirectionalBarChart width={420} height={520} theamColor={theamColor}/>
             <PeriodicData data={barChartdata} width={430} height={250} theamColor={theamColor}/> 

@@ -261,6 +261,42 @@ body {
     padding: 20px !important;
   }
 }
+.Header {
+  padding: 5px 10px;
+  background-color: rgba(149, 149, 149, .20);
+  margin-right: 5px;
+}
+.Daysselection button {
+  font-size: 11px !important;
+  color: #fff;
+  padding: 5px;
+  height: 25px !important;
+  font-size: 11px !important;
+  color: #fff;
+  padding: 5px;
+  height: 27px !important;
+  border: 0.5px solid #fff !important;
+  border-radius: 0 !important;
+}
+.Daysselection button.btn-primary {
+  border: 0.5px solid #144997 !important;
+}
+.Daysselection button:first-child {
+  border-top-left-radius: 5px !important;
+  border-bottom-left-radius: 5px !important;
+}
+.Daysselection button:last-child {
+  border-top-right-radius: 5px !important;
+  border-bottom-right-radius: 5px !important;
+}
+.Light_Mode .SearchInputs input {
+  border: 1px solid #ddd !important; 
+  border-radius: 5px;
+}
+.Light_Mode .Filtericon  svg{
+  fill: #fff;
+}
+
 
 /*!
  * Bootstrap v4.0.0 (https://getbootstrap.com)

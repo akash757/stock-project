@@ -37,6 +37,15 @@ function customizePercentageText({ valueText }) {
 export const PeriodicData = ({ width, height, data, theamColor }) =>  {
   return (
     <div className="BiDirectionalBarChart">
+      <div className="Header d-flex justify-content-between align-center">
+          <p className="m-0">Total Call Sell Cost</p>
+          <div className="Daysselection">
+            <button className="btn btn-primary">0-7</button>
+            <button className="btn btn-link">7-15</button>
+            <button className="btn btn-link">15-30</button>
+            <button className="btn btn-link">30</button>
+          </div>
+      </div>
         <Chart
             dataSource={dataArray}
             palette="Harmony Light"

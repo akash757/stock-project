@@ -76,6 +76,15 @@ export const StackedBarplot = ({ width, height, data, groupAColor = "#4AD366", g
 
   return (
     <div  className="Chart" style={{ width: "50%", height: "100%" }}>
+      <div className="Header d-flex justify-content-between align-center">
+          <p className="m-0">Call and Put Ratio</p>
+          <div className="Daysselection">
+            <button className="btn btn-primary">0-7</button>
+            <button className="btn btn-link">7-15</button>
+            <button className="btn btn-link">15-30</button>
+            <button className="btn btn-link">30</button>
+          </div>
+      </div>
       <svg width={width} height={height} className="${theamColor}">
         <g
           width={boundsWidth}

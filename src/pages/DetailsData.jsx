@@ -17,8 +17,8 @@ export default function DetailsData(detailsofRow, closeDetails) {
   return (
     <>
       <StyleAniamtionModal>
-        <div className='Modal-Content'>
-          <div className='Header'>
+        <div className={`Modal-Content ${theamColor}`}>
+          <div className='HeaderNew'>
             <h5 className='p-0 m-0'>TSLA</h5>
             <button type="button"  onClick={closeDetails} className='p-0 btn btn-link CloseBtnDetails'>
                 <CloseIcon style={{cursor:"pointer", color: "#fff"}}/>

@@ -65,7 +65,7 @@ export const StyleModal = styled('div')({
     width:'63%',
     overflowY:"auto",
     overflowX:"hidden",
-    transition: 'all 0.5s ease-in-out',    
+    transition: 'all 0.5s ease-in-out',
   },
   '& .DivCollection': {
     display: 'flex',
@@ -78,7 +78,7 @@ export const StyleModal = styled('div')({
   },
   '& .RightsideModal .Chart svg': {
     width: "99%",
-    height: '49.5vh !important',
+    height: '43.5vh !important',
   },
   '& .RightsideModal .BiDirectionalBarChart': {
     flex: "1 1 45%",
@@ -114,6 +114,10 @@ export const StyleAniamtionModal = styled('div')({
     animation: 'slideUp 0.3s ease-in-out forwards',
     overflowY: 'auto',
     height: '100%',
+  },
+  '& .Modal-Content.Light_Mode': {
+    backgroundColor: 'rgba(225,225,225,100%)',
+    borderRadius:"0px",
   },
   /* Keyframe for bottom-to-top animation */
   '@keyframes slideUp': {
