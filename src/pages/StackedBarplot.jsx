@@ -1,10 +1,11 @@
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef,  useState  } from "react";
 import * as d3 from "d3";
 
-const MARGIN = { top: 30, right: 30, bottom: 50, left: 50 };
+const MARGIN = { top: 15, right: 30, bottom: 60, left: 50 };
 
-export const StackedBarplot = ({ width, height, data, groupAColor = "#4AD366", groupBColor = "#E41E1E", theamColor }) => {
+export const StackedBarplot = ({ width, height, data, groupAColor = "#00FF59", groupBColor = "#FF605D", theamColor }) => {
   // bounds = area inside the graph axis = calculated by subtracting the margins
+  const [activeButton, setActiveButton] = useState('0-7');
   const axesRef = useRef(null);
   const boundsWidth = width - MARGIN.right - MARGIN.left;
   const boundsHeight = height - MARGIN.top - MARGIN.bottom;
@@ -17,7 +18,7 @@ export const StackedBarplot = ({ width, height, data, groupAColor = "#4AD366", g
   const series = stackSeries(data);
 
   // Y axis
-  const max = 200; // todo
+  const max = 230; // todo
   const yScale = useMemo(() => {
     return d3
       .scaleLinear()
@@ -38,7 +39,7 @@ export const StackedBarplot = ({ width, height, data, groupAColor = "#4AD366", g
   const colorScale = d3
     .scaleOrdinal()
     .domain(allGroups)
-    .range([groupAColor, groupBColor]);
+    .range([groupBColor, groupAColor]);
 
   // Render the X and Y axis using d3.js, not React
   useEffect(() => {
@@ -73,16 +74,26 @@ export const StackedBarplot = ({ width, height, data, groupAColor = "#4AD366", g
       </g>
     );
   });
+  
+
+    const handleClick = (range) => {
+        setActiveButton(range);
+    };
 
   return (
     <div  className="Chart" style={{ width: "50%", height: "100%" }}>
       <div className="Header d-flex justify-content-between align-center">
           <p className="m-0">Call and Put Ratio</p>
-          <div className="Daysselection">
-            <button className="btn btn-primary">0-7</button>
-            <button className="btn btn-link">7-15</button>
-            <button className="btn btn-link">15-30</button>
-            <button className="btn btn-link">30</button>
+          <div className="Daysselection">            
+            {['0-7', '7-15', '15-30', '30'].map((range) => (
+                <button
+                    key={range}
+                    className={`btn ${activeButton === range ? 'btn-primary' : 'btn-link'}`}
+                    onClick={() => handleClick(range)}
+                >
+                    {range}
+                </button>
+            ))}
           </div>
       </div>
       <svg width={width} height={height} className="${theamColor}">

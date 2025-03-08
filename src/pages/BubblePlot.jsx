@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import * as d3 from "d3";
 
 const MARGIN = { top: 30, right: 30, bottom: 80, left: 100 };
@@ -8,6 +8,7 @@ const BUBBLE_MAX_SIZE = 40;
 export const BubblePlot = ({ width, height, data, theamColor }) => {
   // Layout. The div size is set by the given props.
   // The bounds (=area inside the axis) is calculated by subtracting the margins
+  const [activeButton, setActiveButton] = useState('0-7');
   const axesRef = useRef(null);
   const boundsWidth = width - MARGIN.right - MARGIN.left;
   const boundsHeight = height - MARGIN.top - MARGIN.bottom;
@@ -48,7 +49,7 @@ export const BubblePlot = ({ width, height, data, theamColor }) => {
   const colorScale = d3
     .scaleOrdinal()
     .domain(groups)
-    .range(["#4AD366", "#E41E1E"]);
+    .range(["#00FF59", "#FF605D"]);
 
   const sizeScale = useMemo(() => {
     const [min, max] = d3.extent(data.map((d) => d.pop));
@@ -70,11 +71,11 @@ export const BubblePlot = ({ width, height, data, theamColor }) => {
       .call(xAxisGenerator);
     svgElement
       .append("text")
-      .attr("font-size", 12)
+      .attr("font-size", 11)
+      .attr("color", "white")
       .attr("text-anchor", "end")
       .attr("x", boundsWidth)
       .attr("y", boundsHeight + 60)
-      .text("Gdp per Capita");
 
     const yAxisGenerator = d3.axisLeft(yScale);
     svgElement
@@ -87,7 +88,6 @@ export const BubblePlot = ({ width, height, data, theamColor }) => {
       .attr("text-anchor", "end")
       .attr("x", 0)
       .attr("y", -60)
-      .text("Life expectancy")
       .attr("transform", "rotate(-90)");
   }, [xScale, yScale, boundsHeight, boundsWidth]);
 
@@ -103,20 +103,27 @@ export const BubblePlot = ({ width, height, data, theamColor }) => {
         opacity={1}
         stroke={colorScale(d.continent)}
         fill={colorScale(d.continent)}
-        fillOpacity={0.4}
+        fillOpacity={1}
         strokeWidth={1}
       />
     ));
-
+    const handleClick = (range) => {
+      setActiveButton(range);
+  };
   return (
     <div className="Chart" style={{ width: "50%", height: "100%" }}>
       <div className="Header d-flex justify-content-between align-center">
           <p className="m-0">Heat Map</p>
-          <div className="Daysselection">
-            <button className="btn btn-primary">0-7</button>
-            <button className="btn btn-link">7-15</button>
-            <button className="btn btn-link">15-30</button>
-            <button className="btn btn-link">30</button>
+          <div className="Daysselection">            
+            {['0-7', '7-15', '15-30', '30'].map((range) => (
+                <button
+                    key={range}
+                    className={`btn ${activeButton === range ? 'btn-primary' : 'btn-link'}`}
+                    onClick={() => handleClick(range)}
+                >
+                    {range}
+                </button>
+            ))}
           </div>
       </div>
       <svg width={width} height={height} className="${theamColor}">

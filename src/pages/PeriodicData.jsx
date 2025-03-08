@@ -39,12 +39,6 @@ export const PeriodicData = ({ width, height, data, theamColor }) =>  {
     <div className="BiDirectionalBarChart">
       <div className="Header d-flex justify-content-between align-center">
           <p className="m-0">Total Call Sell Cost</p>
-          <div className="Daysselection">
-            <button className="btn btn-primary">0-7</button>
-            <button className="btn btn-link">7-15</button>
-            <button className="btn btn-link">15-30</button>
-            <button className="btn btn-link">30</button>
-          </div>
       </div>
         <Chart
             dataSource={dataArray}
@@ -57,14 +51,14 @@ export const PeriodicData = ({ width, height, data, theamColor }) =>  {
             valueField="count"
             axis="frequency"
             type="bar"
-            color="#46c15f"
+            color="#00FF59"
         />
         <Series
             name="Cumulative percentage"
             valueField="cumulativePercentage"
             axis="percentage"
             type="spline"
-            color="#d01e1e"
+            color="#FF605D"
         />
 
         <ArgumentAxis>

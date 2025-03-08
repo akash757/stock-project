@@ -26,22 +26,6 @@ export const dataSource = [{
     age: '15-19',
     male: -3.2,
     female: 3.0,
-  }, {
-    age: '20-24',
-    male: -3.5,
-    female: 3.3,
-  }, {
-    age: '25-29',
-    male: -3.5,
-    female: 3.4,
-  }, {
-    age: '30-34',
-    male: -3.5,
-    female: 3.3,
-  }, {
-    age: '35-39',
-    male: -3.3,
-    female: 3.1,
   }];
   
 function customizeTooltip(e) {
@@ -54,15 +38,9 @@ function customizeLabel(e) {
 
 export const BiDirectionalBarChart = ({ width, height, data, theamColor }) =>  {
   return (
-    <div className="BiDirectionalBarChart">
+    <div className="BiDirectionalBarChart" style={{fontFamily:"Barlow"}}>
       <div className="Header d-flex justify-content-between align-center">
           <p className="m-0">Call and Put Compression</p>
-          <div className="Daysselection">
-            <button className="btn btn-primary">0-7</button>
-            <button className="btn btn-link">7-15</button>
-            <button className="btn btn-link">15-30</button>
-            <button className="btn btn-link">30</button>
-          </div>
       </div>
         <Chart
         dataSource={dataSource}
@@ -77,12 +55,12 @@ export const BiDirectionalBarChart = ({ width, height, data, theamColor }) =>  {
         <Series
             valueField="male"
             name="Male"
-            color="#d01e1e"
+            color="#00FF59"
         />
         <Series
             valueField="female"
             name="Female"
-            color="#46c15f"
+            color="#FF605D"
         />
         <Tooltip
             enabled={true}

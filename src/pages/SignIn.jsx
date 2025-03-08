@@ -10,10 +10,13 @@ import AppTheme from './AppTheme'; // Import AppTheme component
 import { useNavigate } from 'react-router-dom';
 import { VerifiedUser } from '@mui/icons-material';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
-import LockIcon from '@mui/icons-material/Lock';
-import VisibilityIcon from '@mui/icons-material/Visibility';
+// import LockIcon from '@mui/icons-material/Lock';
+// import VisibilityIcon from '@mui/icons-material/Visibility';
 import { color } from 'framer-motion';
 import  File  from '../assets/Images/file.png';
+import  LockIcon  from '../assets/Images/lock.png';
+import  VisibilityIcon  from '../assets/Images/visibility.png';
+
 import { Link } from 'react-router-dom';
 // import ColorModeSelect from '../shared-theme/ColorModeSelect';
 
@@ -247,7 +250,7 @@ export default function SignIn(props) {
               </span>
               <span style={{position:"relative", display: 'flex', flexDirection: 'column' }}>
               <label for="email" className='mt-3'>Password</label>
-              <LockIcon className='UserIcon' style={{top: '62px'}}/>
+              <img src={LockIcon} alt="Lock Icon" style={{top: '62px', width:'19px'}} class="UserIcon"/>
               <input 
                 type="Password" 
                 id="PasswordF" 
@@ -255,7 +258,8 @@ export default function SignIn(props) {
                 autocomplete="password"
                 className='Inputs'
               />
-              <VisibilityIcon className='UserIcon' style={{top: '62px', right:"16px", left:"auto"}}/>
+              <img src={VisibilityIcon} alt="Lock Icon" style={{top: '62px', right:"16px", left:"auto", width:'19px'}} class="UserIcon"/>
+              {/* <VisibilityIcon className='UserIcon' style={{top: '62px', right:"16px", left:"auto"}}/> */}
               </span>
                <div className="remember-forgot">
                 <div className="remember-me">

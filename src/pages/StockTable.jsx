@@ -12,6 +12,8 @@ import DetailsData from './DetailsData';
 import SearchIcon from '@mui/icons-material/Search';
 import TuneIcon from '@mui/icons-material/Tune';
 import CloudSyncIcon from '@mui/icons-material/CloudSync';
+import Resetsettings  from '../assets/Images/reset_settings.png';
+
 
 
 export default function AnimatedTable() {
@@ -207,7 +209,7 @@ export default function AnimatedTable() {
       <StyleOption>
         <div className='SearchInputs'>
           <SearchIcon  className='SearchIcon'/>
-          <input type="text" placeholder='Search'/>
+          <input type="text" placeholder='Search  Symbol'/>
         </div>
         <button type="button" class="btn btn-primary Filtericon" onClick={() => handleFilerOption()}><TuneIcon />Filter <span class="badge bg-warning text-dark" style={{position:'relative', top:'0px'}}>0</span></button>
       </StyleOption>
@@ -227,12 +229,12 @@ export default function AnimatedTable() {
               {!animationState ? <th>CALL2 PUT BUY RATIO</th> : ""}
               {!animationState ? <th>CALL BUY2 CALL SELL RATIO</th> : ""}
               {!animationState ? <th>CALL BUY2 PREVIOUS CALL BUY</th> : ""}
-              {!animationState ? <th>COND. 1</th>: ""}
-              {!animationState ? <th>COND. 2</th>: ""}
-              {!animationState ? <th>COND. 3</th>: ""}
-              {!animationState ? <th>COND. 4</th>: ""}
-              {!animationState ? <th>COND. 5</th>: ""}
-              {!animationState ? <th>COND. 6</th>: ""}
+              {!animationState ? <th width="5%">COND. 1</th>: ""}
+              {!animationState ? <th width="5%">COND. 2</th>: ""}
+              {!animationState ? <th width="5%">COND. 3</th>: ""}
+              {!animationState ? <th width="5%">COND. 4</th>: ""}
+              {!animationState ? <th width="5%">COND. 5</th>: ""}
+              {!animationState ? <th width="5%">COND. 6</th>: ""}
               <th>ACTION</th>
             </tr>
           </thead>
@@ -249,7 +251,7 @@ export default function AnimatedTable() {
                 }
               >
                 <td width="5%" onClick={(e) => handleDetails(row)}>{index + 1}</td>
-                <td width="5%" onClick={(e) => handleDetails(row)}>{row.name}</td>
+                <td width="2%" onClick={(e) => handleDetails(row)}>{row.name}</td>
                 <td onClick={(e) => handleDetails(row)}>${row.current_price}</td>
                 <td onClick={(e) => handleDetails(row)}>${row.market_cap}</td>
                 {!animationState ? <td onClick={(e) => handleDetails(row)}>{row.market_cap_rank}</td>: ""}
@@ -296,8 +298,8 @@ export default function AnimatedTable() {
                   <div className='DivCollection' style={{display:"flex"}}>
                   <div><p>Filter</p></div>
                   <div className='RightIcon'>
-                    <CloudSyncIcon />
-                    <span style={{margin: '0 15px', position: 'relative', top: '-2px'}}> | </span>
+                    <img src={Resetsettings} alt="Resetsettings"  style={{width: '22.5px', height: '22.5px'}}/>
+                    <span style={{margin: '0 15px', position: 'relative', top: '-2px', color:'#959595'}}> | </span>
                     <button type="button" class="btn btn-link p-0" style={{color: "#fff", lineHeight:'0'}} onClick={() => handleFilerOptionClose()}><CloseIcon /></button>
                   </div>
                 </div>

@@ -6,6 +6,7 @@ export default function Header() {
   const [theamColor, setTheamColor] = useState("");
   const dispatch = useDispatch()
   const handleColorSelection = (event) => {
+    debugger
     setTheamColor(`${event.target.value}`);
     dispatch(toggleTheme(event.target.value))
     document.body.className = event.target.value;

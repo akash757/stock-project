@@ -2,9 +2,11 @@ import { Height, Padding } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
 import zIndex from '@mui/material/styles/zIndex';
 import { transition } from 'd3';
+import { Background } from 'devextreme-react/cjs/range-selector';
 
 export const StyledTable = styled('div')({
   position: 'relative',
+  fontFamily:"Barlow",
   // background:'#000',
   // color:'#fff',
   border:'none',
@@ -18,13 +20,33 @@ export const StyledTable = styled('div')({
     border:'none',
   },
   '& th' : {
-    fontSize: '14px',
-    background: 'rgba(110,107,107,50%)',
-    fontWeight: 'normal',
+    fontSize: '12px',
+    background: 'rgba(149, 149, 149, 10%)',
+    fontWeight: '600',
+    color:'#625f5f',
+    position:'relative',
+    fontFamily:'Barlow'
   },
+  '& th:first-child': {
+    borderTopLeftRadius: '6px'
+  },
+  '& th:last-child' : {
+      borderTopRightRadius: '6px'
+  },
+  '& th:not(:last-child)::after': {
+    content: '""',
+    position: 'absolute',
+    right: 0,
+    top: '40%',  
+    height: '25%', 
+    width: '1px',
+    backgroundColor: '#666',
+    opacity: 0.5,
+    pointerEvents: 'none'
+},
   '& td' : {
-    fontSize: '14px',
-    fontFamily:'Poppins'
+    fontSize: '12px',
+    fontFamily:'Barlow'
   },
   '& th, & td': {
     padding: '5px 10px',
@@ -39,10 +61,10 @@ export const StyledTable = styled('div')({
   //   backgroundColor: '#1e1a1a', /* Light gray */
   // },
   '& .GreenColor td:nth-child(n+2):nth-child(-n+9) ': {
-    color: '#4AD366',
+    color: '#00FF59',
   },
   '& .RedColor td:nth-child(n+2):nth-child(-n+9)': {
-    color: '#E41E1E',
+    color: '#FF605D',
   },
   '& .OptionSelection' : {
     height:'35px',
@@ -55,6 +77,7 @@ export const StyledTable = styled('div')({
   }
 });
 export const StyleModal = styled('div')({
+  fontFamily:"Barlow",
   '& .RightsideModal': {
     position:'fixed',
     zIndex:'999999',
@@ -66,6 +89,7 @@ export const StyleModal = styled('div')({
     overflowY:"auto",
     overflowX:"hidden",
     transition: 'all 0.5s ease-in-out',
+    fontFamily:"Barlow",
   },
   '& .DivCollection': {
     display: 'flex',
@@ -93,6 +117,7 @@ export const StyleModal = styled('div')({
   } 
 });
 export const StyleAniamtionModal = styled('div')({
+  fontFamily:"Barlow",
   position: 'absolute',
   zIndex:'999999',
   top: '0',
@@ -140,13 +165,14 @@ export const StyleAniamtionModal = styled('div')({
     marginTop:'20px',
   },
   '& th' : {
-    fontSize: '14px',
-    background: 'rgba(110,107,107,50%)',
-    fontWeight: 'normal',
+    fontSize: '12px',
+    background: 'rgba(110,107,107,10%)',
+    fontWeight: '500',
+    color: 'rgba(149, 149, 149, 1)',
   },
   '& td' : {
-    fontSize: '14px',
-    fontFamily:'Poppins'
+    fontSize: '12px',
+    fontFamily:'Barlow'
   },
   '& th, & td': {
     padding: '5px 10px',
@@ -157,10 +183,10 @@ export const StyleAniamtionModal = styled('div')({
     display: 'table-row',
   },
   '& .GreenColor td:nth-child(n+2):nth-child(-n+9) ': {
-    color: '#4AD366',
+    color: '#00FF59',
   },
   '& .RedColor td:nth-child(n+2):nth-child(-n+9)': {
-    color: '#E41E1E',
+    color: '#FF605D',
   },
   
 });
@@ -175,12 +201,20 @@ export const StyleOption = styled('div')({
   '& .SearchInputs' : {
     width:'80%',
     marginRight:'15px',
+    fontSize:'14px',
   },
   '& .SearchInputs input' : {
     height:"35px",
     borderRadius:'5px',
     border: 'none',
     padding:'10px 35px',
+    background: '#959595',
+    fontSize:"14px",
+    fontWeight:"500"
+  },
+  '& .SearchInputs input::placeholder' : {    
+    color: '#000',
+    fontSize:'14px',
   },
   '& .SearchInputs svg' : {
     position: 'absolute',
@@ -194,6 +228,9 @@ export const StyleOption = styled('div')({
     height: '35px',
     display:'flex',
     alignItems: 'center',
+    fontSize:'14px',
+    background:'#2838CF',
+    fontWeight:"500"
   },
   '& .Filtericon svg' : {
     fontSize: '20px',

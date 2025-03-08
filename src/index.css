@@ -2,6 +2,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playwrite+AU+SA:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Playwrite+AU+SA:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
+body {
+  font-family: 'Barlow', sans-serif !important;
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -112,6 +119,17 @@ body.Normal_Mode {
   color: var(--text-color-normal);
 }
 
+body.Dark_Mode .GreenColor {
+  background: linear-gradient(180deg, rgba(178, 74, 242, 0) 0%, rgba(178, 74, 242, 0.5) 198.75%);
+}
+
+body.Dark_Mode tr:nth-child(8n), body.Dark_Mode tr:nth-child(13n), body.Dark_Mode tr:nth-child(14n) {
+  background: linear-gradient(180deg, rgba(60, 175, 200, 0) 0%, rgba(60, 175, 200, 0.5) 198.75%);
+}
+body.Dark_Mode tr:nth-child(18n), body.Dark_Mode tr:nth-child(20n) {
+  background: linear-gradient(180deg, rgba(60, 175, 200, 0) 0%, rgba(60, 175, 200, 0.5) 198.75%);
+}
+
 body.Normal_Mode .GreenColor td:nth-child(n+2):nth-child(-n+9) {
   color: #fff !important;
 }
@@ -199,7 +217,8 @@ body {
 .OptionSelection {
   height:35px;
   width:150px;
-  border: 1px solid #f1f1f1;
+  border: 1px solid #959595;
+  background: #959595;
   padding:5px 15px;
   cursor:pointer;
   margin:15px 10px 15px 10px;
@@ -277,6 +296,8 @@ body {
   height: 27px !important;
   border: 0.5px solid #fff !important;
   border-radius: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
 }
 .Daysselection button.btn-primary {
   border: 0.5px solid #144997 !important;
